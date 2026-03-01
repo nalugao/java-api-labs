@@ -15,10 +15,15 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         System.out.println("Digite o livro que você procura: ");
         var titulo = sc.nextLine();
+
         URI uri = new URI("https://www.googleapis.com/books/v1/volumes?q=" + URLEncoder.encode(titulo, StandardCharsets.UTF_8.toString()));
+
         HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder().uri(uri).build();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(uri)
+                .build();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
         System.out.println(response.body());
     }
 }
